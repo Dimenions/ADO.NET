@@ -21,7 +21,7 @@
         {
             this.Radius = r;
         }
-        public double ploshad()
+        public double Ploshad()
         {
             double pi = 3.14;
             return Radius * Radius * pi;
@@ -44,31 +44,20 @@
                     y = value;
             }
         }
-        public static bool operator ==(Round c1, Round c2)
+        public static double operator *(Round c, int m)
         {
-            if (c1.ploshad() == c2.ploshad())
-                return true;
-            else
-                return false;
+            c.Radius = c.Radius * m;
+            return c.Radius;
         }
-        public static bool operator !=(Round c1, Round c2)
+        public static double operator /(Round c, int d)
         {
-            if (c1.ploshad() != c2.ploshad())
-                return true;
-            else
-                return false;
-        }
-        public static double operator *(Round c, double m)
-        {
-            return c.Radius * m;
-        }
-        public static double operator /(Round c, double d)
-        {
-            return c.Radius / d;
+            c.Radius = c.Radius / d;
+            return c.Radius;
         }
         public override string ToString()
         {
-            return $"x={x} y={y} r={Radius}";
+            return "x = " + x + " y = " + y + " r = " + Radius;
         }
     }
+
 }
