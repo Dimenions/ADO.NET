@@ -11,19 +11,17 @@ namespace Task_2_2
             var regex = new Regex(@"[^A-Za-zа-яА-Я]");
 
             RuleFor(x => x.Name).NotEmpty();
-            RuleFor(x => x.Name).Matches(@"[^A-Za-zа-яА-Я]");
+            RuleFor(x => x.Name).Must(x => regex.Matches(x).Count == 0).WithMessage("Введите корректно имя");
+
             RuleFor(x => x.Surname).NotEmpty();
-            //RuleFor(x => x.Surname).Matches(@"[^A-Za-zа-яА-Я]").WithMessage("Введите корректно фамилию");
-            RuleFor(x => x.Surname).Must(x => regex.Matches(x).Count == 0).WithMessage("!!!!");
+            RuleFor(x => x.Surname).Must(x => regex.Matches(x).Count == 0).WithMessage("Введите корректно фамилию");
 
             RuleFor(x => x.Patronymic).NotEmpty();
-            RuleFor(x => x.Patronymic).Matches(@"[^A-Za-zа-яА-Я]");
+            RuleFor(x => x.Patronymic).Must(x => regex.Matches(x).Count == 0).WithMessage("Введите корректно отчество");
 
-            RuleFor(x => x.Age).NotEmpty();
             RuleFor(x => x.Age).GreaterThan(0);
 
             RuleFor(x => x.BirthDate).NotEmpty();
-            //RuleFor(x => x.BirthDate).DatePublicationValid(1900);
             RuleFor(x => x.BirthDate).Must(birthDate => birthDate.Year >= 1900 && birthDate <= DateTime.Now).
                 WithMessage(("Введите корректно дату"));
 
